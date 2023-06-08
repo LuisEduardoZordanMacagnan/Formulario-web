@@ -7,9 +7,9 @@
     <title>Registro</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="container">
     <form action="verifica_registro.php" method="post">
-        <fieldset>
+        <fieldset class="container">
             <legend>Registro</legend>
             <label>Login:</label>
             <input type="text" name="nome" placeholder="Login">
@@ -19,10 +19,12 @@
             <input type="password" name="senha" placeholder="Senha" id="">
             <label>Confirmar senha:</label>
             <input type="password" placeholder="Senha" id="">
+            <?php if($_GET['c']=='true'){ $c = 'true'; } else { $c = null; } ?>
+            <input type="hidden" name="c" value="<?php echo $c; ?>">
             <br>
             <div>
+                <button style="<?php if($_GET['c']=='true'){ echo "visibility: hidden;"; } ?>"><a href="index.php">Logar</a></button>
                 <input type="submit" value="Cadastrar">
-                <button><a style="color: black; text-decoration: none;" href="index.php">Logar</a></button>
             </div>
         </fieldset>
     </form>

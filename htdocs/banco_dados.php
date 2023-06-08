@@ -1,25 +1,21 @@
 <?php
     function conectaBD(){
-        $con = new PDO("mysql:host=localhost;dbname=web", "root", "aluno");
+        $con = new PDO("mysql:host=localhost;dbname=web", "root", "");
         return $con;
     }
 
-
-
-    function inserirUsuario($usuario){
+    function inserirUsuario($nome, $email, $senha){
         try{
             $con=conectaBD();
             $sql = "INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)";
             $stm=$con->prepare($sql);
-            $stm->bindParam(1, $usuario->getNome());
-            $stm->bindParam(2, $usuario->getEmail());
-            $stm->bindParam(3, $usuario->getSenha());
+            $stm->bindParam(1, $nome);
+            $stm->bindParam(2, $email);
+            $stm->bindParam(3, $senha);
             $stm->execute();
-            $usuario->setId(lastInsertId());
         } catch(PDOException $e){
             echo $e->getMessage();
         }
-
         return $con->lastInsertId();
     }
 
@@ -51,6 +47,70 @@
     }  
 
     function listarUsuarios(){
-        
+        try{
+            $con=conectaBD();
+            $sql="SELECT * FROM usuario";
+            $stm=$con->prepare($sql);
+            $stm->execute();
+            $result=$stm->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e){
+            echo $e->getMessage();
+        }
+        return $result;
+    }
+
+    function getUsuario($id){
+        try{
+            $con=conectaBD();
+            $sql="SELECT * FROM usuario WHERE id=?";
+            $stm=$con->prepare($sql);
+            $stm->bindParam(1, $id);
+            $stm->execute();
+            $result=$stm->fetch(PDO::FETCH_ASSOC);
+        } catch(PDOException $e){
+            echo $e->getMessage();
+        }
+        return $result;
+    }
+
+    function pesquisaUsuarios($nome){
+        try{
+            $con=conectaBD();
+            $sql="SELECT * FROM usuario WHERE nome LIKE ?;";
+            $stm=$con->prepare($sql);
+            $nomee="%".$nome."%";
+            $stm->bindParam(1, $nomee);
+            $stm->execute();
+            $result=$stm->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e){
+            echo $e->getMessage();
+        }
+        return $result;
+    }
+
+    function logar($email, $senha){
+        try{
+            $con=conectaBD();
+            $sql="SELECT * FROM usuario WHERE email LIKE ? AND senha LIKE ?;";
+            $stm=$con->prepare($sql);
+            $stm->bindParam(1, $email);
+            $stm->bindParam(2, $senha);
+            $stm->execute();
+            $result=$stm->fetch(PDO::FETCH_ASSOC);
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+        }
+        return $result;
+    }
+
+    function verificarUsuario(){
+        session_start();
+        if($_SESSION['usuarioAtual']==null){
+            $result = 'false';
+        } else {
+            $result = 'true';
+        }
+        return $result;
     }
 ?>

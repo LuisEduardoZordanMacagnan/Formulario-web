@@ -1,5 +1,7 @@
 <?php
     include_once "banco_dados.php";
+    include_once "usuario.php";
+
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $senha = $_POST['senha'];
@@ -11,10 +13,13 @@
     $usuario = new Usuario();
     $usuario->setNome($nome);
     $usuario->setEmail($email);
-    $usuario->setSenha($senha);
+    $usuario->setSenha($senha);    
 
-    session_start();
-    $_SESSION['usuarioAtual']=$usuario;
+    $usuario->setId(inserirUsuario($usuario->getNome(), $usuario->getEmail(), $usuario->getSenha()));
 
-    echo inserirUsuario($usuario);
+    if($_POST['c']!='true'){
+        session_start();
+        $_SESSION['usuarioAtual']=$usuario;
+    }
+    header('Location: home.php');
 ?>

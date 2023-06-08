@@ -7,18 +7,26 @@
     <title>Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="container">
+    <?php
+        session_start();
+        if($_SESSION!=null){
+            if($_SESSION['usuarioAtual']!=null){
+                header('Location: home.php');
+            }
+        }
+    ?>
     <form action="verifica_login.php" method="post">
-        <fieldset>
+        <fieldset class="container">
             <legend>Login</legend>
-            <label>Login:</label>
-            <input type="text" name="nome" placeholder="Login">
+            <label>Email:</label>
+            <input type="email" name="email" placeholder="Email">
             <label>Senha:</label>
             <input type="password" name="senha" placeholder="Senha" id="">
             <br>
             <div>
+                <button><a href="registro.php?c='false'">Cadastrar</a></button>
                 <input type="submit" value="Entrar">
-                <button ><a style="color: black; text-decoration: none;" href="registro.php">Cadastrar</a></button>
             </div>
         </fieldset>
     </form>
