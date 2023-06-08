@@ -8,15 +8,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="container">
-    <?php 
-     include_once "banco_dados.php";
-     include_once "usuario.php";
-     $getUsuarios = pesquisaUsuarios("");
-     session_start();
-     $usuarioAtual = $_SESSION['usuarioAtual'];
+    <?php
+    include_once "banco_dados.php";
+    include_once "usuario.php";
+    $getUsuarios = pesquisaUsuarios($_GET['p']);
+    session_start();
+    $usuarioAtual = $_SESSION['usuarioAtual'];
     ?>
-    <input type="text" placeholder="Pesquisa" style="width: 20%;">
+    <form action="home.php" method="get">
+        <div>
+            <input type="text" placeholder="Pesquisa" style="width: 60%;" name="p">
+            <input type="submit" value="Pesquisar" />
+        </div>
+    </form>
+    <br>
     <label style="border: 2px solid black">Usuario: <?php echo $usuarioAtual->getNome(); ?></label>
+    <br>
     <fieldset class="container">
         <legend>Lista de usuarios</legend>
         <table id="tabela">

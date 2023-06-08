@@ -33,5 +33,5 @@
 
 	alterarUsuario($_POST['id'], $nome, $email, $senha);
 
-	header('Location: home.php');
+	header('Location: home.php?p=');
 ?>
