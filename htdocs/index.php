@@ -12,7 +12,7 @@
         session_start();
         if($_SESSION!=null){
             if($_SESSION['usuarioAtual']!=null){
-                header('Location: home.php');
+                header('Location: home.php?p=');
             }
         }
     ?>
