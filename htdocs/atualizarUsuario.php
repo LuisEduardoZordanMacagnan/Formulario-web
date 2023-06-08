@@ -1,7 +1,10 @@
 <?php
 	include_once "banco_dados.php";
+	include_once "usuario.php";
+	session_start();
 
 	$usuario = getUsuario($_POST['id']);
+	$usuarioAtual = $_SESSION['usuarioAtual'];
 
 	if($_POST['nome']==null){
 		$nome = $usuario['nome'];
@@ -19,6 +22,13 @@
 		$senha = $usuario['senha'];
 	} else {
 		$senha = $_POST['senha'];
+	}
+
+	if($usuarioAtual->getId() == $usuario['id']){
+		$usuarioAtual->setNome($nome);
+		$usuarioAtual->setEmail($email);
+		$usuarioAtual->setSenha($senha); 
+		$_SESSION['usuarioAtual']=$usuarioAtual;
 	}
 
 	alterarUsuario($_POST['id'], $nome, $email, $senha);

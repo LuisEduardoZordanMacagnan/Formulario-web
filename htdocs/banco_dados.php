@@ -104,6 +104,20 @@
         return $result;
     }
 
+    function verificarCadastro($email){
+    try{
+            $con=conectaBD();
+            $sql="SELECT * FROM usuario WHERE email LIKE ?;";
+            $stm=$con->prepare($sql);
+            $stm->bindParam(1, $email);
+            $stm->execute();
+            $result=$stm->fetch(PDO::FETCH_ASSOC);
+        } catch(PDOException $e){
+            echo $e->getMessage();
+        }
+        return $result;
+    }
+
     function verificarUsuario(){
         session_start();
         if($_SESSION['usuarioAtual']==null){
