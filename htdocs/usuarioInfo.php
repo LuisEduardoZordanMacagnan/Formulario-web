@@ -26,7 +26,7 @@
              <br />
              <div>
              <button><a href="home.php?p=">Voltar</a></button>
-                 <input type="submit" value="Atualizar" />
+                 <input style="background-color: rgb(255, 123, 47); color: white" type="submit" value="Atualizar" />
                  <button><a href="deletarUsuario.php?id=<?php echo $id; ?>">Deletar</a></button>
              </div>
          </fieldset>

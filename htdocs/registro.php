@@ -12,7 +12,7 @@
         <fieldset class="container">
             <legend>Registro</legend>
             <label>Login:</label>
-            <input type="text" name="nome" placeholder="Login">
+            <input type="text" name="nome" placeholder="Nome">
             <label>Email:</label>
             <input type="email" name="email" placeholder="Email">
             <label>Senha:</label>
@@ -24,7 +24,7 @@
             <br>
             <div>
                 <button style="<?php if($_GET['c']=='true'){ echo " visibility: hidden;"; } ?>"><a href="index.php">Logar</a></button>
-                <input disabled type="submit" value="Cadastrar" id="submit">
+                <input style="background-color: rgb(255, 123, 47); color: white" disabled type="submit" value="Cadastrar" id="submit">
             </div>
         </fieldset>
     </form>

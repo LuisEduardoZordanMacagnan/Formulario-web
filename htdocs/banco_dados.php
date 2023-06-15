@@ -1,6 +1,6 @@
 <?php
     function conectaBD(){
-        $con = new PDO("mysql:host=localhost;dbname=web", "root", "");
+        $con = new PDO("mysql:host=localhost;dbname=web", "root", "aluno");
         return $con;
     }
 

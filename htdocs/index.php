@@ -26,7 +26,7 @@
             <br>
             <div>
                 <button><a href="registro.php?c='false'">Cadastrar</a></button>
-                <input type="submit" value="Entrar">
+                <input style="background-color: rgb(255, 123, 47); color: white" type="submit" value="Entrar">
             </div>
         </fieldset>
     </form>

@@ -4,6 +4,9 @@
 
 body {
     height: 100vh;
+    background-color: rgb(58, 58, 58); 
+    color: rgb(168, 168, 168);
+    border-style: double; 
 }
 
 .container {
@@ -14,6 +17,22 @@ body {
 }
 
 a {
-    color: black; 
+    color: rgb(168, 168, 168);
     text-decoration: none;
+}
+
+button{
+    background-color: black;
+    transition: 0.5s;
+    border-color: rgb(168, 168, 168);
+}
+
+button:hover{
+    box-shadow: 0px 0px 10px whitesmoke;
+}
+
+input{
+    background-color: rgb(58, 58, 58); 
+    color: rgb(168, 168, 168);
+    box-shadow: 0px 0px 4px darkorange;
 }

@@ -18,7 +18,7 @@
     <form action="home.php" method="get">
         <div>
             <input type="text" placeholder="Pesquisa" style="width: 60%;" name="p">
-            <input type="submit" value="Pesquisar" />
+            <input style="background-color: rgb(255, 123, 47); color: white" type="submit" value="Pesquisar" />
         </div>
     </form>
     <br>
