@@ -25,7 +25,7 @@
              <input name="senha" type="password" placeholder="Senha" />
              <br />
              <div>
-             <button><a href="home.php">Voltar</a></button>
+             <button><a href="home.php?p=">Voltar</a></button>
                  <input type="submit" value="Atualizar" />
                  <button><a href="deletarUsuario.php?id=<?php echo $id; ?>">Deletar</a></button>
              </div>

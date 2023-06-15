@@ -24,6 +24,6 @@
             session_start();
             $_SESSION['usuarioAtual']=$usuario;
         }
-        header('Location: home.php');
+        header('Location: home.php?p=');
     }
 ?>

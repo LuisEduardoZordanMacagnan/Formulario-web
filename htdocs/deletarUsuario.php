@@ -10,7 +10,7 @@
 		if($usuario->getId() == $_GET['id']){
 			header('Location: logoff.php');
 		}else{
-			header('Location: home.php');
+			header('Location: home.php?p=');
 		}
 	}
 ?>
