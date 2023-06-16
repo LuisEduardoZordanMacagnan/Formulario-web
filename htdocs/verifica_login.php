@@ -11,6 +11,7 @@
         $usuario->setEmail($u['email']);
         $usuario->setSenha($u['senha']); 
         $usuario->setId($u['id']);
+        $usuario->setFoto($u['foto']);
         session_start();
         $_SESSION['usuarioAtual']=$usuario;
         header('Location: home.php?p=');

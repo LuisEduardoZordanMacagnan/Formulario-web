@@ -1,79 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<style>
-    body{
-        background-color: rgb(58, 58, 58); 
-        color: rgb(168, 168, 168);
-        border-style: double;
-        border-radius: 100cm;
-    }
-    
-    button{
-        background-color: black;
-        transition: 0.5s;
-        border-color: rgb(190, 190, 190);
+<?php
+	include_once "banco_dados.php";
+	include_once "usuario.php";
+	session_start();
+
+	$usuario = getUsuario($_POST['id']);
+	$usuarioAtual = $_SESSION['usuarioAtual'];
+
+	if($_POST['nome']==null){
+		$nome = $usuario['nome'];
+	} else {
+		$nome = $_POST['nome'];
+	}
+
+	if($_POST['email']==null){
+		$email = $usuario['email'];
+	} else {
+		$email = $_POST['email'];
+	}
+
+	if($_POST['senha']==null){
+		$senha = $usuario['senha'];
+	} else {
+		$senha = $_POST['senha'];
+	}
+
+	if(!empty($_FILES["foto"]["name"])){
+        $target_dir = "imagens/";
+        $target_file = $target_dir.basename($_FILES["foto"]["name"]);
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        move_uploaded_file($_FILES['foto']['tmp_name'], $target_file);
+        $fotoNome = $_FILES['foto']['name'];
+        $image_base64 = base64_encode(file_get_contents('imagens/'.$fotoNome) );
+        $foto = 'data:image/'.$imageFileType.';base64,'.$image_base64;
+    } else {
+        $foto = $usuario['foto'];
     }
 
-    button:hover{
-        box-shadow: 0px 0px 10px whitesmoke;;
-    }
+	if($usuarioAtual->getId() == $usuario['id']){
+		$usuarioAtual->setNome($nome);
+		$usuarioAtual->setEmail($email);
+		$usuarioAtual->setSenha($senha);
+		$usuarioAtual->setFoto($foto);
+		$_SESSION['usuarioAtual']=$usuarioAtual;
+	}
 
-    a{
-        color: rgb(168, 168, 168);
-    }
+	echo alterarUsuario($_POST['id'], $nome, $email, $senha, $foto);
 
-    input{
-        background-color: rgb(58, 58, 58); 
-        color: rgb(168, 168, 168);
-        border-color: rgb(190, 190, 190);
-    }
-</style>
-<body class="container">
-    <?php
-    include_once "banco_dados.php";
-    include_once "usuario.php";
-    $getUsuarios = pesquisaUsuarios($_GET['p']);
-    session_start();
-    $usuarioAtual = $_SESSION['usuarioAtual'];
-    ?>
-    <form action="home.php" method="get">
-        <div>
-            <input type="text" placeholder="Pesquisa" style="width: 60%;" name="p">
-            <input style="background-color: rgb(255, 123, 47); color: white" type="submit" value="Pesquisar" />
-        </div>
-    </form>
-    <br>
-    <label style="border: 2px solid black">Usuario: <?php echo $usuarioAtual->getNome(); ?></label>
-    <br>
-    <fieldset class="container">
-        <legend>Lista de usuarios</legend>
-        <table id="tabela">
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Editar</th>
-            </tr>
-            <?php foreach($getUsuarios as $usuario){ ?>
-            <tr>
-                <td><?php echo $usuario['id']; ?></td>
-                <td><?php echo $usuario['nome']; ?></td>
-                <td><?php echo $usuario['email']; ?></td>
-                <td><button><a href="usuarioInfo.php?id=<?php echo $usuario['id'] ?>">Editar</a></button></td>
-            </tr>
-            <?php } ?>
-        </table>
-        <div>
-            <button><a href="logoff.php">Deslogar</a></button>
-            <button><a href="registro.php?c=true">Cadastrar</a></button>
-        </div>
-    </fieldset>
-</body>
-</html>
+	header('Location: home.php?p=');
+?>

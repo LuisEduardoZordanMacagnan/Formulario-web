@@ -4,14 +4,15 @@
         return $con;
     }
 
-    function inserirUsuario($nome, $email, $senha){
+    function inserirUsuario($nome, $email, $senha, $foto){
         try{
             $con=conectaBD();
-            $sql = "INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO usuario (nome, email, senha, foto) VALUES (?, ?, ?, ?)";
             $stm=$con->prepare($sql);
             $stm->bindParam(1, $nome);
             $stm->bindParam(2, $email);
             $stm->bindParam(3, $senha);
+            $stm->bindParam(4, $foto);
             $stm->execute();
         } catch(PDOException $e){
             echo $e->getMessage();
@@ -19,15 +20,16 @@
         return $con->lastInsertId();
     }
 
-    function alterarUsuario($id, $nome, $email, $senha){
+    function alterarUsuario($id, $nome, $email, $senha, $foto){
         try{
             $con=conectaBD();
-            $sql = "UPDATE usuario SET email = ?, senha = ?, nome = ? WHERE id = ?;";
+            $sql = "UPDATE usuario SET email = ?, senha = ?, nome = ?, foto = ? WHERE id = ?;";
             $stm=$con->prepare($sql);
             $stm->bindParam(1, $email);
             $stm->bindParam(2, $senha);
             $stm->bindParam(3, $nome);
-            $stm->bindParam(4, $id);
+            $stm->bindParam(4, $foto);
+            $stm->bindParam(5, $id);
             $stm->execute();
         } catch(PDOException $e){
             echo $e->getMessage();

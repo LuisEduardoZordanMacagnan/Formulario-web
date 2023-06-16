@@ -4,6 +4,7 @@
         private $nome;
         private $senha;
         private $email;
+        private $foto;
         
         function setId($id){
             $this->id = $id;
@@ -35,6 +36,14 @@
 
         function getEmail(){
             return $this->email;
+        }
+
+        function setFoto($foto){
+            $this->foto = $foto;
+        }
+
+        function getFoto(){
+            return $this->foto;
         }
     }
 ?>

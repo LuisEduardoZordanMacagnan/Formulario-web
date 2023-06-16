@@ -15,14 +15,19 @@
     session_start();
     $usuarioAtual = $_SESSION['usuarioAtual'];
     ?>
+    <?php if($usuarioAtual->getFoto()!=null){
+        $foto = $usuarioAtual->getFoto();
+        echo "<img style='width: 10%; height: 20%; border: 2px solid gray;' src='$foto' />";
+    }?>
+   
+    <label>Usuario: <?php echo $usuarioAtual->getNome(); ?></label>
+    <br>
     <form action="home.php" method="get">
         <div>
             <input type="text" placeholder="Pesquisa" style="width: 60%;" name="p">
             <input style="background-color: rgb(255, 123, 47); color: white" type="submit" value="Pesquisar" />
         </div>
     </form>
-    <br>
-    <label style="border: 2px solid black">Usuario: <?php echo $usuarioAtual->getNome(); ?></label>
     <br>
     <fieldset class="container">
         <legend>Lista de usuarios</legend>

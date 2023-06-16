@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="container">
-    <form action="verifica_registro.php" method="post">
+    <form action="verifica_registro.php" method="post" enctype="multipart/form-data">
         <fieldset class="container">
             <legend>Registro</legend>
-            <label>Login:</label>
+            <label>Nome:</label>
             <input type="text" name="nome" placeholder="Nome">
             <label>Email:</label>
             <input type="email" name="email" placeholder="Email">
@@ -19,6 +19,8 @@
             <input type="password" name="senha" placeholder="Senha" id="senha1" onkeyup="compararSenha()">
             <label>Confirmar senha:</label>
             <input type="password" placeholder="Senha" id="senha2" onkeyup="compararSenha()">
+            <label>Foto:</label>
+            <input style="background-color: rgb(255, 123, 47); color: white" type="file" name="foto" accept="image/png, image/jpeg" />
             <?php if($_GET['c']=='true'){ $c = 'true'; } else { $c = null; } ?>
             <input type="hidden" name="c" value="<?php echo $c; ?>">
             <br>
