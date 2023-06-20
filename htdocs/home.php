@@ -17,7 +17,7 @@
     ?>
     <?php if($usuarioAtual->getFoto()!=null){
         $foto = $usuarioAtual->getFoto();
-        echo "<img style='width: 10%; height: 20%; border: 2px solid gray;' src='$foto' />";
+        echo "<img style='width: 10%; height: 20%; border: 2px solid gray; border-radius: 100%;' src='$foto' />";
     }?>
    
     <label>Usuario: <?php echo $usuarioAtual->getNome(); ?></label>
@@ -34,15 +34,21 @@
         <table id="tabela">
             <tr>
                 <th>ID</th>
+                <th>||</th>
                 <th>Nome</th>
+                <th>||</th>
                 <th>Email</th>
+                <th>||</th>
                 <th>Editar</th>
             </tr>
             <?php foreach($getUsuarios as $usuario){ ?>
             <tr>
                 <td><?php echo $usuario['id']; ?></td>
+                <td>||</td>
                 <td><?php echo $usuario['nome']; ?></td>
+                <td>||</td>
                 <td><?php echo $usuario['email']; ?></td>
+                <td>||</td>
                 <td><button><a href="usuarioInfo.php?id=<?php echo $usuario['id'] ?>">Editar</a></button></td>
             </tr>
             <?php } ?>
